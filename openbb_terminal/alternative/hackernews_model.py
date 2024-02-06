@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 @log_start_end(log=logger)
-def get_stories(limit: int = 10) -> pd.DataFrame:
+def get_stories(limit: int = 10, min_score: int = 100) -> pd.DataFrame:
     """Get top stories from HackerNews.
     Parameters
     ----------
@@ -34,7 +34,8 @@ def get_stories(limit: int = 10) -> pd.DataFrame:
             story = request(
                 f"https://hacker-news.firebaseio.com/v0/item/{story_id}.json"
             ).json()
-            stories.append(story)
+            if story["score"] > min_score:
+                stories.append(story)
         df = pd.DataFrame(stories)
         df["time"] = pd.to_datetime(df["time"], unit="s")
         df = df[["title", "url", "score", "type", "time"]]
