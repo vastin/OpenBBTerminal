@@ -1419,6 +1419,7 @@ class BaseController(metaclass=ABCMeta):
                             an_input = session.prompt(
                                 f"{get_flair()} {self.PATH} $ ",
                                 completer=self.completer,
+                                reserve_space_for_menu=1,
                                 search_ignore_case=True,
                                 bottom_toolbar=HTML(
                                     '<style bg="ansiblack" fg="ansiwhite">[h]</style> help menu    '
