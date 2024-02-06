@@ -844,6 +844,7 @@ def terminal(jobs_cmds: Optional[List[str]] = None, test_mode=False):
                         an_input = session.prompt(
                             f"{get_flair()} / $ ",
                             completer=t_controller.completer,
+                            reserve_space_for_menu=1,
                             search_ignore_case=True,
                             bottom_toolbar=HTML(
                                 '<style bg="ansiblack" fg="ansiwhite">[h]</style> help menu    '
