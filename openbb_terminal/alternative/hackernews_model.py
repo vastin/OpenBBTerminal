@@ -38,6 +38,8 @@ def get_stories(limit: int = 10, min_score: int = 100) -> pd.DataFrame:
                 stories.append(story)
         df = pd.DataFrame(stories)
         df["time"] = pd.to_datetime(df["time"], unit="s")
-        df = df[["title", "url", "score", "type", "time"]]
+        df = df[["id", "title", "url", "score", "type", "time"]]
+        # Convert ID column to HackerNews item URLs
+        df["id"] = "https://news.ycombinator.com/item?id=" + df["id"].astype(str)
         return df
     return pd.DataFrame()
